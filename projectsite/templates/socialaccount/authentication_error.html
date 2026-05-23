@@ -1,0 +1,23 @@
+{% extends "base_auth.html" %}
+{% load i18n %}
+
+{% block title %}Sign-in error — Hangarin Arms{% endblock %}
+
+{% block auth_content %}
+<div class="auth-card">
+	<div class="auth-card-header">Could not sign in with Google</div>
+	<div class="auth-card-body">
+		<p class="mb-3">
+			We could not complete sign-in with your Google account. This is usually a configuration issue, not a problem with your Google account.
+		</p>
+		<ul class="small text-muted pl-3 mb-3">
+			<li>Google OAuth credentials are missing or incorrect in the server <code>.env</code> file.</li>
+			<li>The redirect URI in Google Cloud Console does not match this site (see below).</li>
+			<li>The Django <strong>Sites</strong> domain does not match the URL you are using.</li>
+		</ul>
+		<p class="small mb-2"><strong>Add this redirect URI in Google Cloud Console:</strong></p>
+		<p class="small bg-light p-2 rounded"><code>{{ request.scheme }}://{{ request.get_host }}/accounts/google/login/callback/</code></p>
+		<a href="{% url 'account_login' %}" class="btn btn-primary btn-block btn-login mt-3">Back to sign in</a>
+	</div>
+</div>
+{% endblock %}

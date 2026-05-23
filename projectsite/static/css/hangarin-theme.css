@@ -1,0 +1,234 @@
+/* Hangarin Arms — red, black, white theme */
+:root {
+  --ha-red: #c41e3a;
+  --ha-red-dark: #8b1529;
+  --ha-red-bright: #e82545;
+  --ha-black: #0a0a0a;
+  --ha-black-soft: #141414;
+  --ha-gray: #1e1e1e;
+  --ha-gray-mid: #2a2a2a;
+  --ha-white: #ffffff;
+  --ha-muted: #b8b8b8;
+}
+
+body,
+.wrapper {
+  background: var(--ha-black) !important;
+  color: var(--ha-white) !important;
+}
+
+.main-header {
+  background: var(--ha-black-soft) !important;
+  border-bottom: 2px solid var(--ha-red) !important;
+}
+
+.main-header .logo-header {
+  background: var(--ha-black) !important;
+  border-right: 1px solid var(--ha-gray-mid) !important;
+}
+
+.main-header .logo-header a.logo {
+  color: var(--ha-white) !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.05em;
+}
+
+.navbar-header,
+.navbar.navbar-header {
+  background: var(--ha-black-soft) !important;
+}
+
+.navbar-header .navbar-nav .nav-link,
+.navbar-header .navbar-nav .nav-link span {
+  color: var(--ha-white) !important;
+}
+
+.navbar-header .navbar-nav .nav-link:hover {
+  color: var(--ha-red-bright) !important;
+}
+
+.navbar-header .form-control {
+  background: var(--ha-gray) !important;
+  border-color: var(--ha-gray-mid) !important;
+  color: var(--ha-white) !important;
+}
+
+.sidebar {
+  background: var(--ha-black) !important;
+  border-right: 1px solid var(--ha-gray-mid) !important;
+}
+
+.sidebar .user .info a,
+.sidebar .user .info a span,
+.sidebar .nav .nav-item a,
+.sidebar .nav .nav-item a p {
+  color: var(--ha-white) !important;
+}
+
+.sidebar .user .photo {
+  background: var(--ha-red) !important;
+  color: var(--ha-white) !important;
+}
+
+.sidebar .nav .nav-item a:hover,
+.sidebar .nav .nav-item a:focus {
+  background: var(--ha-gray) !important;
+}
+
+.sidebar .nav .nav-item.active a {
+  background: var(--ha-red-dark) !important;
+  color: var(--ha-white) !important;
+}
+
+.sidebar .nav .nav-item.active a:before {
+  background: var(--ha-red-bright) !important;
+}
+
+.main-panel {
+  background: var(--ha-black-soft) !important;
+}
+
+.content {
+  background: transparent !important;
+}
+
+.page-title,
+h4.page-title {
+  color: var(--ha-white) !important;
+}
+
+.card {
+  background: var(--ha-gray) !important;
+  border: 1px solid var(--ha-gray-mid) !important;
+  color: var(--ha-white) !important;
+}
+
+.card-header {
+  background: var(--ha-black) !important;
+  border-bottom: 2px solid var(--ha-red) !important;
+}
+
+.card-title {
+  color: var(--ha-white) !important;
+}
+
+.card-category,
+.card-body p,
+.text-muted {
+  color: var(--ha-muted) !important;
+}
+
+.table {
+  color: var(--ha-white) !important;
+}
+
+.table thead th {
+  background: var(--ha-red-dark) !important;
+  color: var(--ha-white) !important;
+  border-color: var(--ha-gray-mid) !important;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background: rgba(255, 255, 255, 0.03) !important;
+}
+
+.table tbody tr {
+  border-color: var(--ha-gray-mid) !important;
+}
+
+.table tbody td {
+  border-color: var(--ha-gray-mid) !important;
+  color: var(--ha-white) !important;
+}
+
+.form-control {
+  background: var(--ha-black-soft) !important;
+  border-color: var(--ha-gray-mid) !important;
+  color: var(--ha-white) !important;
+}
+
+.form-control:focus {
+  border-color: var(--ha-red) !important;
+  box-shadow: 0 0 0 0.2rem rgba(196, 30, 58, 0.25) !important;
+}
+
+label,
+.col-form-label {
+  color: var(--ha-white) !important;
+}
+
+.btn-primary,
+.btn-login {
+  background: var(--ha-red) !important;
+  border-color: var(--ha-red) !important;
+  color: var(--ha-white) !important;
+}
+
+.btn-primary:hover,
+.btn-login:hover {
+  background: var(--ha-red-bright) !important;
+  border-color: var(--ha-red-bright) !important;
+}
+
+.btn-success {
+  background: var(--ha-red-dark) !important;
+  border-color: var(--ha-red) !important;
+  color: var(--ha-white) !important;
+}
+
+.btn-success:hover {
+  background: var(--ha-red) !important;
+}
+
+.btn-danger {
+  background: #5c0a14 !important;
+  border-color: var(--ha-red) !important;
+}
+
+.btn-secondary {
+  background: var(--ha-gray-mid) !important;
+  border-color: #444 !important;
+  color: var(--ha-white) !important;
+}
+
+.btn-link.text-primary {
+  color: var(--ha-red-bright) !important;
+}
+
+.btn-link.text-danger {
+  color: #ff6b7a !important;
+}
+
+.input-group-text {
+  background: var(--ha-gray-mid) !important;
+  border-color: var(--ha-gray-mid) !important;
+  color: var(--ha-white) !important;
+}
+
+/* Dashboard stat cards — red/black variants */
+.card-stats.card-warning,
+.card-stats.card-success,
+.card-stats.card-danger,
+.card-stats.card-primary,
+.card-stats.card-info {
+  background: linear-gradient(135deg, var(--ha-black) 0%, var(--ha-gray) 100%) !important;
+  border: 1px solid var(--ha-red-dark) !important;
+}
+
+.card-stats .card-category {
+  color: var(--ha-muted) !important;
+}
+
+.card-stats .card-title,
+.card-stats .numbers h4 {
+  color: var(--ha-white) !important;
+}
+
+.card-stats .icon-big i {
+  color: var(--ha-red) !important;
+}
+
+.card-stats.card-danger .icon-big i,
+.card-stats.card-warning .icon-big i {
+  color: var(--ha-red-bright) !important;
+}

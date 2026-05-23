@@ -1,0 +1,8 @@
+<script>
+if ('serviceWorker' in navigator) {
+	window.addEventListener('load', function () {
+		navigator.serviceWorker.register('{% url "pwa-service-worker" %}', { scope: '/' })
+			.catch(function (err) { console.warn('PWA service worker registration failed:', err); });
+	});
+}
+</script>

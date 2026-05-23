@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Categories</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Firearm categories</div>
+                        <p class="card-category">Handguns, rifles, shotguns, and other product lines.</p>
+                    </div>
+                    <br />
+                    <div class="col-md-12 row mb-3">
+                        <div class="col-md-6">
+                            <form class="navbar-left navbar-form nav-search mr-md-3" action="{% url 'college-list' %}">
+                                <div class="input-group">
+                                    <input type="text" placeholder="Search categories..." class="form-control" name="q" value="{{ request.GET.q }}" />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="la la-search search-icon"></i></span>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-head-bg-warning mt-4">
+                            <thead>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Added</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for college in colleges %}
+                                <tr>
+                                    <td>{{ college.college_name }}</td>
+                                    <td>{{ college.created_at|date:"M d, Y" }}</td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="2" class="text-center">No categories found.</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% include 'includes/pagination.html' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

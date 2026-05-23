@@ -1,0 +1,128 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>{% block title %}Hangarin Arms{% endblock %}</title>
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+	{% include 'includes/pwa_head.html' %}
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+	<link rel="stylesheet" href="{% static 'css/ready.css' %}">
+	<link rel="stylesheet" href="{% static 'css/demo.css' %}">
+	<link rel="stylesheet" href="{% static 'css/hangarin-theme.css' %}">
+</head>
+<body>
+	<div class="wrapper">
+		<div class="main-header">
+			<div class="logo-header">
+				<a href="{% url 'home' %}" class="logo">
+					Hangarin Arms
+				</a>
+				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<button class="topbar-toggler more"><i class="la la-ellipsis-v"></i></button>
+			</div>
+			<nav class="navbar navbar-header navbar-expand-lg">
+				<div class="container-fluid">
+					<form class="navbar-left navbar-form nav-search mr-md-3" action="">
+						<div class="input-group">
+							<input type="text" placeholder="Search inventory..." class="form-control" style="border-radius: 20px;">
+						</div>
+					</form>
+					<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
+						<li class="nav-item dropdown">
+							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
+								<img src="{% static 'img/profile.jpg' %}" alt="user-img" width="36" class="img-circle">
+								{% if user.is_authenticated %}
+								<span>{{ user.get_username }}</span>
+								{% else %}
+								<span>Guest</span>
+								{% endif %}
+							</a>
+						</li>
+						{% if user.is_authenticated %}
+						<li class="nav-item">
+							<a href="{% url 'account_logout' %}" class="nav-link">Logout</a>
+						</li>
+						{% else %}
+						<li class="nav-item">
+							<a href="{% url 'account_login' %}" class="nav-link">Login</a>
+						</li>
+						{% endif %}
+					</ul>
+				</div>
+			</nav>
+		</div>
+		<div class="sidebar">
+			<div class="scrollbar-inner sidebar-wrapper">
+				<div class="user">
+					<div class="photo" style="display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; border-radius: 50%; width: 40px; height: 40px;">
+						{% if user.is_authenticated %}{{ user.get_username|first|upper }}{% else %}?{% endif %}
+					</div>
+					<div class="info">
+						<a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+							<span>
+								{% if user.is_authenticated %}
+								{{ user.get_username }}
+								{% else %}
+								Not logged in
+								{% endif %}
+							</span>
+						</a>
+					</div>
+				</div>
+					<ul class="nav">
+						<li class="nav-item {% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+							<a href="{% url 'home' %}">
+								<i class="la la-dashboard"></i>
+								<p>Dashboard</p>
+							</a>
+						</li>
+						<li class="nav-item {% if request.resolver_match.url_name == 'organization-list' or request.resolver_match.url_name == 'organization-add' or request.resolver_match.url_name == 'organization-update' %}active{% endif %}">
+							<a href="{% url 'organization-list' %}">
+								<i class="la la-crosshairs"></i>
+								<p>Firearms</p>
+							</a>
+						</li>
+						<li class="nav-item {% if request.resolver_match.url_name == 'orgmember-list' %}active{% endif %}">
+							<a href="{% url 'orgmember-list' %}">
+								<i class="la la-shopping-cart"></i>
+								<p>Sales</p>
+							</a>
+						</li>
+						<li class="nav-item {% if request.resolver_match.url_name == 'student-list' %}active{% endif %}">
+							<a href="{% url 'student-list' %}">
+								<i class="la la-user"></i>
+								<p>Customers</p>
+							</a>
+						</li>
+						<li class="nav-item {% if request.resolver_match.url_name == 'college-list' %}active{% endif %}">
+							<a href="{% url 'college-list' %}">
+								<i class="la la-tags"></i>
+								<p>Categories</p>
+							</a>
+						</li>
+						<li class="nav-item {% if request.resolver_match.url_name == 'program-list' %}active{% endif %}">
+							<a href="{% url 'program-list' %}">
+								<i class="la la-bullseye"></i>
+								<p>Calibers</p>
+							</a>
+						</li>
+					</ul>
+			</div>
+		</div>
+		<div class="main-panel">
+			{% block content %}
+			{% endblock %}
+		</div>
+	</div>
+</body>
+<script src="{% static 'js/core/jquery.3.2.1.min.js' %}"></script>
+<script src="{% static 'js/core/popper.min.js' %}"></script>
+<script src="{% static 'js/core/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/plugin/jquery-scrollbar/jquery.scrollbar.min.js' %}"></script>
+<script src="{% static 'js/ready.min.js' %}"></script>
+{% include 'includes/pwa_register.html' %}
+</html>
