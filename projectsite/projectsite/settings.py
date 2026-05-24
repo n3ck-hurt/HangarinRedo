@@ -33,7 +33,7 @@ SECRET_KEY = os.getenv(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'True').lower() in ('1', 'true', 'yes')
 
-_default_hosts = 'localhost,127.0.0.1,wrenchnickhurt.pythonanywhere.com'
+_default_hosts = 'localhost,127.0.0.1,estaresyodj223.pythonanywhere.com'
 ALLOWED_HOSTS = [
     h.strip() for h in os.getenv('ALLOWED_HOSTS', _default_hosts).split(',') if h.strip()
 ]
