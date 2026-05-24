@@ -224,6 +224,16 @@ PWA is built in (no extra pip package):
 
 Logged-in pages still need network; offline mode shows `/offline/` when navigation fails.
 
+### Verify PWA (local or on server)
+
+```bash
+cd ~/HangarinRedo/projectsite
+source ../venv/bin/activate
+python manage.py check_pwa
+```
+
+In Chrome: **DevTools → Application → Manifest** and **Service workers** (must be HTTPS on PythonAnywhere).
+
 ### Update PWA cache after changes
 
 Edit `CACHE_VERSION` in `projectsite/static/pwa/service-worker.js`, then:
