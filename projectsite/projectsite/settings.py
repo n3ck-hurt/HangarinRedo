@@ -33,7 +33,7 @@ SECRET_KEY = os.getenv(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'True').lower() in ('1', 'true', 'yes')
 
-_default_hosts = 'localhost,127.0.0.1,estaresyodj223.pythonanywhere.com'
+_default_hosts = 'localhost,127.0.0.1,EstaresYodj223.pythonanywhere.com'
 ALLOWED_HOSTS = [
     h.strip() for h in os.getenv('ALLOWED_HOSTS', _default_hosts).split(',') if h.strip()
 ]
@@ -76,15 +76,11 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
     'studentorg',
     'widget_tweaks',
 ]
 
-if _google_provider_ready():
-    INSTALLED_APPS.insert(
-        INSTALLED_APPS.index('studentorg'),
-        'allauth.socialaccount.providers.google',
-    )
 
 GOOGLE_OAUTH_ENABLED = 'allauth.socialaccount.providers.google' in INSTALLED_APPS
 
@@ -178,7 +174,7 @@ STATICFILES_DIRS = (
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Auth (django-allauth)
-SITE_ID = 1
+SITE_ID = 2
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
@@ -210,11 +206,6 @@ if GOOGLE_OAUTH_ENABLED:
         'google': {
             'SCOPE': ['profile', 'email'],
             'AUTH_PARAMS': {'access_type': 'online'},
-            'APP': {
-                'client_id': GOOGLE_CLIENT_ID,
-                'secret': GOOGLE_CLIENT_SECRET,
-                'key': '',
-            },
         },
     }
 else:
