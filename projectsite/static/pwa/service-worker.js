@@ -1,5 +1,5 @@
 /* Hangarin Arms PWA service worker */
-const CACHE_VERSION = 'hangarin-arms-v1';
+const CACHE_VERSION = 'hangarin-arms-v2';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const PRECACHE_URLS = [
   '/offline/',
@@ -13,7 +13,9 @@ const PRECACHE_URLS = [
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(STATIC_CACHE).then((cache) => cache.addAll(PRECACHE_URLS)).then(() => self.skipWaiting())
+    caches.open(STATIC_CACHE).then((cache) =>
+      Promise.allSettled(PRECACHE_URLS.map((url) => cache.add(url)))
+    ).then(() => self.skipWaiting())
   );
 });
 

@@ -1,7 +1,9 @@
 from pathlib import Path
 
 from django.conf import settings
-from django.http import HttpResponse, JsonResponse
+import json
+
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.decorators.cache import cache_control
 from django.views.decorators.http import require_GET
@@ -13,6 +15,7 @@ def manifest(request):
     icon_192 = request.build_absolute_uri(f'{settings.STATIC_URL}pwa/icon-192.png')
     icon_512 = request.build_absolute_uri(f'{settings.STATIC_URL}pwa/icon-512.png')
     data = {
+        'id': '/',
         'name': 'Hangarin Arms',
         'short_name': 'Hangarin',
         'description': 'Gun store inventory and sales dashboard',
@@ -37,7 +40,11 @@ def manifest(request):
             },
         ],
     }
-    return JsonResponse(data)
+    response = HttpResponse(
+        json.dumps(data, indent=2),
+        content_type='application/manifest+json; charset=utf-8',
+    )
+    return response
 
 
 @require_GET
