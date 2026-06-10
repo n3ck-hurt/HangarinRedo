@@ -48,11 +48,21 @@
 			<button type="submit" class="btn btn-primary btn-block btn-login">Login</button>
 		</form>
 
-		{% if google_oauth_enabled %}
+		{% if google_oauth_enabled or github_oauth_enabled %}
 		<div class="auth-divider"><span>Or sign in with</span></div>
-		<a href="{% provider_login_url 'google' process='login' %}" class="btn btn-google btn-block">
-			Continue with Google
-		</a>
+		<div class="d-flex flex-column gap-2">
+			{% if google_oauth_enabled %}
+			<a href="{% provider_login_url 'google' process='login' %}" class="btn btn-google btn-block mb-2">
+				Continue with Google
+			</a>
+			{% endif %}
+
+			{% if github_oauth_enabled %}
+			<a href="{% provider_login_url 'github' process='login' %}" class="btn btn-dark btn-block">
+				<i class="la la-github"></i> Continue with GitHub
+			</a>
+			{% endif %}
+		</div>
 		{% endif %}
 	</div>
 	<div class="auth-footer">

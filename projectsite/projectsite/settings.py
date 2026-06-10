@@ -50,6 +50,9 @@ if not DEBUG and not CSRF_TRUSTED_ORIGINS:
 GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID', '')
 GOOGLE_CLIENT_SECRET = os.getenv('GOOGLE_CLIENT_SECRET', '')
 
+GITHUB_CLIENT_ID = os.getenv('GITHUB_CLIENT_ID', '')
+GITHUB_CLIENT_SECRET = os.getenv('GITHUB_CLIENT_SECRET', '')
+
 
 def _google_provider_ready():
     if not (GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET):
@@ -61,6 +64,12 @@ def _google_provider_ready():
         return True
     except ImportError:
         return False
+
+
+def _github_provider_ready():
+    if not (GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET):
+        return False
+    return True
 
 
 # Application definition
@@ -77,6 +86,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.github',
     'studentorg',
     'widget_tweaks',
 ]
@@ -85,6 +95,11 @@ INSTALLED_APPS = [
 GOOGLE_OAUTH_ENABLED = (
     'allauth.socialaccount.providers.google' in INSTALLED_APPS and 
     _google_provider_ready()
+)
+
+GITHUB_OAUTH_ENABLED = (
+    'allauth.socialaccount.providers.github' in INSTALLED_APPS and 
+    _github_provider_ready()
 )
 
 MIDDLEWARE = [
@@ -204,17 +219,25 @@ SOCIALACCOUNT_EMAIL_AUTHENTICATION_AUTO_CONNECT = True
 SOCIALACCOUNT_QUERY_EMAIL = True
 SOCIALACCOUNT_AUTO_SIGNUP = True
 
+SOCIALACCOUNT_PROVIDERS = {}
+
 if GOOGLE_OAUTH_ENABLED:
-    SOCIALACCOUNT_PROVIDERS = {
-        'google': {
-            'APP': {
-                'client_id': GOOGLE_CLIENT_ID,
-                'secret': GOOGLE_CLIENT_SECRET,
-                'key': ''
-            },
-            'SCOPE': ['profile', 'email'],
-            'AUTH_PARAMS': {'access_type': 'online'},
+    SOCIALACCOUNT_PROVIDERS['google'] = {
+        'APP': {
+            'client_id': GOOGLE_CLIENT_ID,
+            'secret': GOOGLE_CLIENT_SECRET,
+            'key': ''
         },
+        'SCOPE': ['profile', 'email'],
+        'AUTH_PARAMS': {'access_type': 'online'},
     }
-else:
-    SOCIALACCOUNT_PROVIDERS = {}
+
+if GITHUB_OAUTH_ENABLED:
+    SOCIALACCOUNT_PROVIDERS['github'] = {
+        'APP': {
+            'client_id': GITHUB_CLIENT_ID,
+            'secret': GITHUB_CLIENT_SECRET,
+            'key': ''
+        },
+        'SCOPE': ['user', 'repo', 'read:org'],
+    }
