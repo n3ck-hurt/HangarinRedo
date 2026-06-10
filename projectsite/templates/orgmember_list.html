@@ -24,6 +24,9 @@
                                 </div>
                             </form>
                         </div>
+                        <div class="col-md-6 text-right">
+                            <a href="{% url 'orgmember-add' %}" class="btn btn-success btn-rounded">Add Sale</a>
+                        </div>
                     </div>
                     <div class="col-md-12">
                         <form method="get" class="row g-2 align-items-center">
@@ -50,6 +53,7 @@
                                     <th>Firearm</th>
                                     <th>Caliber</th>
                                     <th>Sale date</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -59,6 +63,10 @@
                                     <td>{{ member.organization.name }}</td>
                                     <td>{{ member.student.program.prog_name }}</td>
                                     <td>{{ member.date_joined|date:"M d, Y" }}</td>
+                                    <td>
+                                        <a href="{% url 'orgmember-update' member.id %}" class="btn btn-sm btn-link text-primary">Edit</a>
+                                        <a href="{% url 'orgmember-delete' member.id %}" class="btn btn-sm btn-link text-danger">Delete</a>
+                                    </td>
                                 </tr>
                                 {% empty %}
                                 <tr>

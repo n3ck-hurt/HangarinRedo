@@ -24,6 +24,9 @@
                                 </div>
                             </form>
                         </div>
+                        <div class="col-md-6 text-right">
+                            <a href="{% url 'college-add' %}" class="btn btn-success btn-rounded">Add Category</a>
+                        </div>
                     </div>
                     <div class="card-body">
                         <table class="table table-head-bg-warning mt-4">
@@ -31,6 +34,7 @@
                                 <tr>
                                     <th>Category</th>
                                     <th>Added</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -38,6 +42,10 @@
                                 <tr>
                                     <td>{{ college.college_name }}</td>
                                     <td>{{ college.created_at|date:"M d, Y" }}</td>
+                                    <td>
+                                        <a href="{% url 'college-update' college.id %}" class="btn btn-sm btn-link text-primary">Edit</a>
+                                        <a href="{% url 'college-delete' college.id %}" class="btn btn-sm btn-link text-danger">Delete</a>
+                                    </td>
                                 </tr>
                                 {% empty %}
                                 <tr>

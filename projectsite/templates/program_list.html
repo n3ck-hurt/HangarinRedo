@@ -24,6 +24,9 @@
                                 </div>
                             </form>
                         </div>
+                        <div class="col-md-6 text-right">
+                            <a href="{% url 'program-add' %}" class="btn btn-success btn-rounded">Add Caliber</a>
+                        </div>
                     </div>
                     <div class="col-md-12">
                         <form method="get" class="row g-2 align-items-center">
@@ -47,6 +50,7 @@
                                 <tr>
                                     <th>Caliber / series</th>
                                     <th>Category</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -54,6 +58,10 @@
                                 <tr>
                                     <td>{{ program.prog_name }}</td>
                                     <td>{{ program.college.college_name }}</td>
+                                    <td>
+                                        <a href="{% url 'program-update' program.id %}" class="btn btn-sm btn-link text-primary">Edit</a>
+                                        <a href="{% url 'program-delete' program.id %}" class="btn btn-sm btn-link text-danger">Delete</a>
+                                    </td>
                                 </tr>
                                 {% empty %}
                                 <tr>

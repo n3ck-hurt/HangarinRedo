@@ -5,7 +5,13 @@ from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 
-from studentorg.forms import OrganizationForm
+from studentorg.forms import (
+    CollegeForm,
+    OrgMemberForm,
+    OrganizationForm,
+    ProgramForm,
+    StudentForm,
+)
 from studentorg.mixins import SearchableListMixin, SortableListMixin
 from studentorg.models import College, OrgMember, Organization, Program, Student
 
@@ -80,6 +86,36 @@ class OrgMemberListView(LoginRequiredMixin, SearchableListMixin, SortableListMix
         return super().get_queryset().select_related('student', 'organization')
 
 
+class OrgMemberCreateView(LoginRequiredMixin, CreateView):
+    model = OrgMember
+    form_class = OrgMemberForm
+    template_name = 'org_form.html'
+    success_url = reverse_lazy('orgmember-list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Add Sale'
+        return context
+
+
+class OrgMemberUpdateView(LoginRequiredMixin, UpdateView):
+    model = OrgMember
+    form_class = OrgMemberForm
+    template_name = 'org_form.html'
+    success_url = reverse_lazy('orgmember-list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Edit Sale'
+        return context
+
+
+class OrgMemberDeleteView(LoginRequiredMixin, DeleteView):
+    model = OrgMember
+    template_name = 'org_del.html'
+    success_url = reverse_lazy('orgmember-list')
+
+
 class StudentListView(LoginRequiredMixin, SearchableListMixin, ListView):
     model = Student
     context_object_name = 'students'
@@ -96,12 +132,71 @@ class StudentListView(LoginRequiredMixin, SearchableListMixin, ListView):
         return super().get_queryset().select_related('program')
 
 
+class StudentCreateView(LoginRequiredMixin, CreateView):
+    model = Student
+    form_class = StudentForm
+    template_name = 'org_form.html'
+    success_url = reverse_lazy('student-list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Add Customer'
+        return context
+
+
+class StudentUpdateView(LoginRequiredMixin, UpdateView):
+    model = Student
+    form_class = StudentForm
+    template_name = 'org_form.html'
+    success_url = reverse_lazy('student-list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Edit Customer'
+        return context
+
+
+class StudentDeleteView(LoginRequiredMixin, DeleteView):
+    model = Student
+    template_name = 'org_del.html'
+    success_url = reverse_lazy('student-list')
+
+
 class CollegeListView(LoginRequiredMixin, SearchableListMixin, ListView):
-    model = College
     context_object_name = 'colleges'
     template_name = 'college_list.html'
     paginate_by = 5
     search_fields = ('college_name',)
+
+
+class CollegeCreateView(LoginRequiredMixin, CreateView):
+    model = College
+    form_class = CollegeForm
+    template_name = 'org_form.html'
+    success_url = reverse_lazy('college-list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Add Category'
+        return context
+
+
+class CollegeUpdateView(LoginRequiredMixin, UpdateView):
+    model = College
+    form_class = CollegeForm
+    template_name = 'org_form.html'
+    success_url = reverse_lazy('college-list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Edit Category'
+        return context
+
+
+class CollegeDeleteView(LoginRequiredMixin, DeleteView):
+    model = College
+    template_name = 'org_del.html'
+    success_url = reverse_lazy('college-list')
 
 
 class ProgramListView(LoginRequiredMixin, SearchableListMixin, SortableListMixin, ListView):
@@ -115,3 +210,33 @@ class ProgramListView(LoginRequiredMixin, SearchableListMixin, SortableListMixin
 
     def get_queryset(self):
         return super().get_queryset().select_related('college')
+
+
+class ProgramCreateView(LoginRequiredMixin, CreateView):
+    model = Program
+    form_class = ProgramForm
+    template_name = 'org_form.html'
+    success_url = reverse_lazy('program-list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Add Caliber'
+        return context
+
+
+class ProgramUpdateView(LoginRequiredMixin, UpdateView):
+    model = Program
+    form_class = ProgramForm
+    template_name = 'org_form.html'
+    success_url = reverse_lazy('program-list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Edit Caliber'
+        return context
+
+
+class ProgramDeleteView(LoginRequiredMixin, DeleteView):
+    model = Program
+    template_name = 'org_del.html'
+    success_url = reverse_lazy('program-list')

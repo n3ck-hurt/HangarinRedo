@@ -4,22 +4,22 @@
 {% block content %}
 <div class="content">
   <div class="container-fluid">
-    <h4 class="page-title">Remove listing</h4>
+    <h4 class="page-title">Remove item</h4>
     <div class="row">
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <div class="card-title">Delete firearm</div>
+            <div class="card-title">Delete confirmation</div>
             <div class="card-category">Warning: This action is permanent and cannot be undone</div>
           </div>
           <div class="card-body">
             <div class="col-md-6">
               <form action="" method="post" novalidate>
                 {% csrf_token %}
-                <p class="mb-4">Remove <strong>"{{ object }}"</strong> from the catalog permanently?</p>
+                <p class="mb-4">Remove <strong>"{{ object }}"</strong> permanently?</p>
                 <div class="form-group px-0">
                   <button type="submit" class="btn btn-danger btn-rounded">Confirm delete</button>
-                  <a href="{% url 'organization-list' %}" class="btn btn-secondary btn-rounded ml-2">Cancel</a>
+                  <button type="button" class="btn btn-secondary btn-rounded ml-2" onclick="history.back()">Cancel</button>
                 </div>
               </form>
             </div>
