@@ -45,12 +45,6 @@ self.addEventListener('fetch', (event) => {
   if (request.mode === 'navigate') {
     event.respondWith(
       fetch(request)
-        .then((response) => {
-          if (response && response.status === 200) {
-            return response;
-          }
-          return caches.match('/offline/');
-        })
         .catch(() => caches.match('/offline/'))
     );
     return;

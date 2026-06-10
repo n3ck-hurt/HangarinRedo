@@ -82,7 +82,10 @@ INSTALLED_APPS = [
 ]
 
 
-GOOGLE_OAUTH_ENABLED = 'allauth.socialaccount.providers.google' in INSTALLED_APPS
+GOOGLE_OAUTH_ENABLED = (
+    'allauth.socialaccount.providers.google' in INSTALLED_APPS and 
+    _google_provider_ready()
+)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -204,6 +207,11 @@ SOCIALACCOUNT_AUTO_SIGNUP = True
 if GOOGLE_OAUTH_ENABLED:
     SOCIALACCOUNT_PROVIDERS = {
         'google': {
+            'APP': {
+                'client_id': GOOGLE_CLIENT_ID,
+                'secret': GOOGLE_CLIENT_SECRET,
+                'key': ''
+            },
             'SCOPE': ['profile', 'email'],
             'AUTH_PARAMS': {'access_type': 'online'},
         },
