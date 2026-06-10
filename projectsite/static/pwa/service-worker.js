@@ -1,5 +1,5 @@
 /* Hangarin Arms PWA service worker */
-const CACHE_VERSION = 'hangarin-arms-v2';
+const CACHE_VERSION = 'hangarin-arms-v3';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const PRECACHE_URLS = [
   '/offline/',

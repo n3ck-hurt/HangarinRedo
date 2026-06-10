@@ -35,7 +35,8 @@ Project layout on the server should look like:
 
 ```bash
 cd ~/HangarinRedo
-python3.10 -m venv venv   # use the Python version shown on your PA Web tab
+# Use the Python version shown on your PA Web tab (e.g. 3.10, 3.11, 3.13)
+python3.13 -m venv venv   
 source venv/bin/activate
 pip install --upgrade pip
 pip install -r requirements.txt

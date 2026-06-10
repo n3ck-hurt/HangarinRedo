@@ -1,7 +1,19 @@
 <script>
 if ('serviceWorker' in navigator) {
 	window.addEventListener('load', function () {
-		navigator.serviceWorker.register('{% url "pwa-service-worker" %}', { scope: '/' })
+		navigator.serviceWorker.register('{% url "pwa-service-worker" %}?v=3', { scope: '/' })
+			.then(function (registration) {
+				// Check if the service worker is updated
+				registration.addEventListener('updatefound', () => {
+					const newWorker = registration.installing;
+					newWorker.addEventListener('statechange', () => {
+						if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+							// New worker is ready, force a reload to use it
+							window.location.reload();
+						}
+					});
+				});
+			})
 			.catch(function (err) { console.warn('PWA service worker registration failed:', err); });
 	});
 }
